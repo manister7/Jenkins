@@ -13,6 +13,13 @@ pipeline {
         steps {
         echo "This is build $BUILD_NUMBER"
       }
-      }     
+        
+        stage('Stage3') {
+          steps {
+            chmod +x ./test.sh
+            /bin/bash test.sh
+          }
+      }
+        
    }
  }  
