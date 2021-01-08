@@ -1,22 +1,45 @@
 pipeline {
-    agent any
+    agent any 
     environment {
         RELEASE='20.04'
     }
-    stages {
-        stage('Build') {
-            agent any
+        stages {
+            stage('Build') {
+            agent any    
             environment {
-                LOG_LEVEL='INFO'
+                LOG_LEVEL='info'
             }
             steps {
-                echo "Building release ${RELEASE} with log level ${LOG_LEVEL}..."
+                echo "Release Version: $RELEASE, LOG Level ${LOG_LEVEL}"
             }
         }
-        stage('Test') {
+        
+         stage('Test') {
             steps {
-                echo "Testing. I can see release ${RELEASE}, but not log level ${LOG_LEVEL}"
+               echo "Testing Release Version: $Release"
             }
         }
-    }
+        
+         stage('Deploy') {
+                input {
+                message 'Deploy?'
+                ok 'Do it!'
+                parameters {
+                    string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', Description: 'Target deployment Environment')
+                }
+            }     
+            
+            steps {
+                echo "Deploying Release Version $RELEASE to environment ${TARGET_ENVIRONMENT}"
+            }
+         }
+        }
+            
+            post{
+                always {
+                    echo 'Prints whether deploy happened or not, success or failure'
+                }
+            }
 }
+            
+            
