@@ -16,8 +16,10 @@ pipeline {
         
         stage('Stage3') {
           steps {
-            chmod +x ./test.sh
-            /bin/bash test.sh
+            sh '''
+             chmod +x ./test.sh
+             /bin/bash test.sh
+            '''
           }
       }
         
