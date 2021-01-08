@@ -3,6 +3,7 @@ pipeline {
    
    environment {
        DEMO='1.3'
+	   value='hello'
    }
 
    stages {
@@ -14,6 +15,7 @@ pipeline {
                chmod +x test.sh
                ./test.sh
             '''
+			echo "Passing $value"
          }
       }
    }
