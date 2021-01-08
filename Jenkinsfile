@@ -4,10 +4,15 @@ pipeline {
   agent any
     stages {
       stage('Stage1') {
-      echo "This is stage1"
+        steps {
+          echo "This is stage1"
+          }
       }
+      
       stage('Stage2') {
-      echo "This is build $BUILD_NUMBER"
+        steps {
+        echo "This is build $BUILD_NUMBER"
       }
+      }     
    }
  }  
